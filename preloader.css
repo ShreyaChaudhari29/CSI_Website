@@ -1,0 +1,153 @@
+/* ==========================================================================
+   CSI VIT Pune Cinematic Preloader Styles
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Michroma&family=Montserrat:wght@700;800;900&display=swap');
+
+#csi-preloader {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: #000000;
+  z-index: 9999999;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  user-select: none;
+  pointer-events: all;
+  margin: 0;
+  padding: 0;
+  transition: opacity 0.75s cubic-bezier(0.22, 1, 0.36, 1), transform 0.75s cubic-bezier(0.22, 1, 0.36, 1), visibility 0.75s;
+}
+
+#csi-preloader.csi-preloader-hidden {
+  opacity: 0;
+  transform: scale(1.35); /* Zooms forward towards camera on exit */
+  pointer-events: none;
+  visibility: hidden;
+}
+
+.csi-preloader-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 600px;
+  padding: 1rem;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.csi-preloader-svg {
+  width: 320px;
+  height: 320px;
+  max-width: 80vw;
+  max-height: 80vw;
+  margin: 0 auto;
+  display: block;
+  overflow: visible;
+}
+
+@media (min-width: 768px) {
+  .csi-preloader-svg {
+    width: 410px;
+    height: 410px;
+  }
+}
+
+/* Stroke Line Drawing Animations (3.0s total) */
+.csi-draw {
+  stroke-dasharray: 2000;
+  stroke-dashoffset: 2000;
+  animation: csiStrokeAnim 3.0s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+}
+
+.csi-outer {
+  animation-delay: 0.0s;
+  stroke-dasharray: 1800;
+  stroke-dashoffset: 1800;
+}
+
+.csi-inner {
+  animation-delay: 0.2s;
+  stroke-dasharray: 1300;
+  stroke-dashoffset: 1300;
+}
+
+.csi-tri {
+  fill-opacity: 0;
+  stroke-dasharray: 600;
+  stroke-dashoffset: 600;
+  animation: csiTriAnim 2.2s cubic-bezier(0.25, 1, 0.5, 1) forwards, csiFillAnim 0.6s ease-out 2.7s forwards;
+}
+
+.csi-t1 { animation-delay: 0.3s, 2.7s; }
+.csi-t2 { animation-delay: 0.45s, 2.7s; }
+.csi-t3 { animation-delay: 0.6s, 2.7s; }
+.csi-t4 { animation-delay: 0.75s, 2.7s; }
+
+@keyframes csiStrokeAnim {
+  to { stroke-dashoffset: 0; }
+}
+
+@keyframes csiTriAnim {
+  to { stroke-dashoffset: 0; }
+}
+
+@keyframes csiFillAnim {
+  to { fill-opacity: 1; }
+}
+
+.csi-fade {
+  opacity: 0;
+  animation: csiFadeIn 1.0s ease-out forwards;
+}
+
+.csi-top-text { animation-delay: 0.8s; }
+.csi-tm { animation-delay: 0.9s; }
+.csi-motto { animation-delay: 1.0s; }
+.csi-mid-text { animation-delay: 1.2s; }
+
+@keyframes csiFadeIn {
+  to { opacity: 1; }
+}
+
+/* Lower Title Block */
+.csi-preloader-title {
+  margin-top: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  width: 100%;
+  opacity: 0;
+  animation: csiFadeIn 1.0s ease-out 1.4s forwards;
+}
+
+.csi-pre-t1 {
+  font-family: 'Michroma', sans-serif;
+  font-size: clamp(0.85rem, 2.2vw, 1.15rem);
+  font-weight: 400;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: #ffffff;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.csi-pre-t2 {
+  font-family: 'Michroma', sans-serif;
+  font-size: clamp(0.62rem, 1.5vw, 0.75rem);
+  font-weight: 400;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: #00d0ff;
+  margin: 0.55rem auto 0 auto;
+  text-align: center;
+  opacity: 0.9;
+}

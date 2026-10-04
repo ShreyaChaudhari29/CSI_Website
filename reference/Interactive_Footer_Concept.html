@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>CSI VIT Pune — Interactive Footer Concept</title>
+<style>
+  :root{
+    --ink:#0c1830; --ink2:#0a1426; --logo-blue:#2548a6;
+    --steel:#26425a; --sky:#86a8cf; --blush:#c38eb4; --pale:#e9eef7; --line: rgba(233,238,247,0.14);
+  }
+  *{box-sizing:border-box;}
+  body{margin:0; background:var(--ink); color:var(--pale); font-family:Arial, Helvetica, sans-serif;}
+  footer{max-width:1280px; margin:0 auto;}
+
+  footer{
+    position:relative; overflow:hidden;
+    background:linear-gradient(180deg, var(--ink) 0%, var(--ink2) 100%);
+    padding:70px 70px 0;
+  }
+  .footer-glow{
+    position:absolute; width:480px; height:480px; border-radius:50%;
+    right:-120px; top:-180px;
+    background:radial-gradient(circle, rgba(134,168,207,0.16), transparent 70%);
+  }
+  .footer-top{
+    position:relative;
+    display:flex; align-items:flex-start; flex-wrap:wrap; gap:20px;
+    padding-bottom:50px; border-bottom:1px solid var(--line);
+  }
+  .footer-top > div{margin-right:60px;}
+  .f-brand{width:100%; max-width:360px;}
+  .f-col{width:160px;}
+  .stats{flex-wrap:wrap;}
+  .footer-bottom{flex-wrap:wrap; gap:14px;}
+  @media(max-width:700px){ footer{padding:50px 24px 0;} .footer-top>div{margin-right:0;} }
+  .f-brand{display:flex; align-items:flex-start; gap:14px;}
+  .f-mark{width:44px; height:44px; min-width:44px; border-radius:50%; border:2px solid var(--logo-blue); display:flex; align-items:center; justify-content:center; font-weight:bold; color:var(--logo-blue); font-size:17px;}
+  .f-brand h4{margin:0 0 6px; font-size:18px; font-weight:bold;}
+  .f-brand p{margin:0; font-size:13px; color:#aebbd4; line-height:1.6; max-width:30ch;}
+
+  .f-col h5{font-size:12px; letter-spacing:0.06em; text-transform:uppercase; color:var(--blush); margin:0 0 18px;}
+  .f-col ul{list-style:none; margin:0; padding:0;}
+  .f-col li{font-size:14px; color:#c3cde0; margin-bottom:12px;}
+
+  .f-robot-col{display:flex; flex-direction:column; align-items:flex-start;}
+  .mini-robot{position:relative; width:86px; height:92px; margin-bottom:16px;}
+  .mr-ant{position:absolute; left:50%; top:-12px; transform:translateX(-50%); width:2px; height:12px; background:var(--sky); transition:transform 0.3s ease;}
+  .mr-ant::after{content:''; position:absolute; top:-5px; left:50%; transform:translateX(-50%); width:6px; height:6px; border-radius:50%; background:var(--blush); transition:box-shadow 0.3s ease;}
+  .mr-head{position:absolute; top:0; left:0; width:100%; height:62px; background:linear-gradient(160deg,var(--steel),var(--ink2)); border:1.2px solid var(--sky); border-radius:20px; transition:transform 0.35s ease;}
+  .mr-face{position:absolute; top:20px; left:50%; transform:translateX(-50%); width:56px; height:24px; background:var(--ink); border-radius:12px; display:flex; align-items:center; justify-content:space-around; padding:0 8px;}
+  .mr-eye{width:11px; height:11px; background:var(--pale); border-radius:50%; position:relative; overflow:hidden;}
+  .mr-pupil{position:absolute; width:4.5px; height:4.5px; background:var(--logo-blue); border-radius:50%; top:3.2px; left:5px; transition:transform 0.08s linear;}
+  .mr-lid{position:absolute; left:0; right:0; top:0; height:0%; background:var(--ink); transition:height 0.4s ease;}
+  .mr-arm{position:absolute; width:6px; height:20px; background:var(--steel); border:1px solid var(--sky); border-radius:4px; top:58px; right:-3px; transform-origin:top center; transform:rotate(0deg); transition:transform 0.3s ease;}
+  .mr-body{position:absolute; top:54px; left:5px; right:5px; bottom:0; background:linear-gradient(160deg,var(--steel),var(--ink2)); border:1.2px solid var(--line); border-radius:12px; transition:transform 0.3s ease;}
+  .f-robot-col p{font-size:13px; color:var(--sky); margin:0; max-width:20ch;}
+
+  /* mood states */
+  .mini-robot.sleeping .mr-lid{ height:85%; }
+  .mini-robot.sleeping .mr-head{ animation: mr-bob 2.6s ease-in-out infinite; }
+  @keyframes mr-bob{ 0%,100%{ transform:translateY(0) rotate(-1deg); } 50%{ transform:translateY(3px) rotate(1deg); } }
+  .mini-robot.startled .mr-lid{ height:0%; transition:height 0.08s ease; }
+  .mini-robot.startled .mr-ant{ transform:translateX(-50%) scaleY(1.3); }
+  .mini-robot.startled .mr-ant::after{ box-shadow:0 0 12px 3px var(--blush); }
+  .mini-robot.startled .mr-head{ animation:none; transform:translateY(-2px); }
+  .mini-robot.curious .mr-head{ animation:none; transform:rotate(-4deg); }
+  .mini-robot.curious .mr-body{ transform:rotate(2deg); }
+  .mini-robot.excited .mr-head{ transform:translateX(6px) rotate(-6deg); }
+  .mini-robot.excited .mr-body{ transform:translateX(4px); }
+  .mini-robot.excited .mr-arm{ transform:rotate(-55deg); }
+  .mini-robot.excited .mr-ant::after{ box-shadow:0 0 10px 3px var(--blush); }
+
+  .footer-bottom{
+    position:relative;
+    display:flex; align-items:center; justify-content:space-between;
+    padding:26px 0;
+  }
+  .f-copy{font-size:12px; color:#8291ab;}
+  .f-social{display:flex; gap:14px;}
+  .f-social span{
+    width:34px; height:34px; border-radius:50%; border:1px solid var(--line);
+    display:flex; align-items:center; justify-content:center; font-size:12px; color:var(--sky);
+    cursor:pointer; transition: transform 0.15s ease, background 0.15s ease, color 0.15s ease;
+  }
+  .f-social span:hover{ background:var(--logo-blue); color:#fff; transform:translateY(-3px); }
+  .f-tagline{font-size:12px; color:var(--blush);}
+
+  .f-col a{ color:#c3cde0; text-decoration:none; position:relative; }
+  .f-col a::after{
+    content:''; position:absolute; left:0; bottom:-3px; width:0; height:1px;
+    background:var(--sky); transition:width 0.2s ease;
+  }
+  .f-col a:hover{ color:var(--sky); }
+  .f-col a:hover::after{ width:100%; }
+
+  .mini-robot{ cursor:pointer; }
+  .speech{
+    position:absolute; left:100px; top:-6px; width:210px;
+    background:var(--pale); color:var(--ink); font-size:12px; line-height:1.5;
+    padding:12px 14px; border-radius:12px; opacity:0; pointer-events:none;
+    transform:translateY(6px); transition:opacity 0.18s ease, transform 0.18s ease;
+  }
+  .speech::after{
+    content:''; position:absolute; left:-6px; top:16px; width:10px; height:10px;
+    background:var(--pale); transform:rotate(45deg);
+  }
+  .f-robot-col.active .speech{ opacity:1; transform:translateY(0); pointer-events:auto; }
+
+  .stats{ display:flex; gap:50px; margin:0 0 46px; }
+  .stat{ }
+  .stat .num{ font-size:30px; font-weight:bold; color:var(--pale); }
+  .stat .label{ font-size:12px; color:var(--sky); margin-top:4px; }
+</style>
+</head>
+<body>
+
+<div style="height:90vh; display:flex; align-items:center; justify-content:center; color:var(--sky); font-size:14px; text-align:center; padding:0 24px;">
+  Scroll down to reach the footer — the mascot is asleep until then.
+</div>
+
+<footer>
+  <div class="footer-glow"></div>
+
+  <div class="stats">
+    <div class="stat"><div class="num" id="n1">0</div><div class="label">Members</div></div>
+    <div class="stat"><div class="num" id="n2">0</div><div class="label">Events run</div></div>
+    <div class="stat"><div class="num" id="n3">0</div><div class="label">Years active</div></div>
+  </div>
+
+  <div class="footer-top">
+    <div class="f-brand">
+      <div class="f-mark">CS</div>
+      <div>
+        <h4>CSI — VIT Pune</h4>
+        <p>Computer Society of India, Student Chapter. Building, learning, and shipping together.</p>
+      </div>
+    </div>
+    <div class="f-col">
+      <h5>Explore</h5>
+      <ul><li><a href="#">Events</a></li><li><a href="#">Team</a></li><li><a href="#">Projects</a></li><li><a href="#" id="joinLink">Join us</a></li></ul>
+    </div>
+    <div class="f-col">
+      <h5>Resources</h5>
+      <ul><li><a href="#">Past events</a></li><li><a href="#">Gallery</a></li><li><a href="#">Certificates</a></li><li><a href="#">Contact</a></li></ul>
+    </div>
+    <div class="f-robot-col" id="robotCol" style="position:relative;">
+      <div class="mini-robot sleeping" id="miniRobot">
+        <div class="mr-ant"></div>
+        <div class="mr-head"><div class="mr-face">
+          <div class="mr-eye"><div class="mr-pupil" id="mp1"></div><div class="mr-lid"></div></div>
+          <div class="mr-eye"><div class="mr-pupil" id="mp2"></div><div class="mr-lid"></div></div>
+        </div></div>
+        <div class="mr-arm"></div>
+        <div class="mr-body"></div>
+        <div class="speech" id="speech">Fun fact: our first hackathon ran on one broken coffee machine.</div>
+      </div>
+      <p id="miniCaption">zzz... click me when I wake up.</p>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="f-copy">© 2026 CSI VIT Pune Student Chapter. All rights reserved.</div>
+    <div class="f-tagline">सर्वे भवन्तु सुखिनः</div>
+    <div class="f-social">
+      <span>in</span><span>ig</span><span>gh</span><span>yt</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // mascot eyes track cursor
+  const pupils = [document.getElementById('mp1'), document.getElementById('mp2')];
+  document.addEventListener('mousemove', (e) => {
+    document.querySelectorAll('.mr-eye').forEach((eyeEl, i) => {
+      const r = eyeEl.getBoundingClientRect();
+      const cx = r.left + r.width/2, cy = r.top + r.height/2;
+      const dx = e.clientX - cx, dy = e.clientY - cy;
+      const dist = Math.min(Math.hypot(dx,dy), 40);
+      const ang = Math.atan2(dy,dx);
+      pupils[i].style.transform = `translate(${Math.cos(ang)*(dist/40)*2.5}px, ${Math.sin(ang)*(dist/40)*2.5}px)`;
+    });
+  });
+
+  // mood state machine for the footer mascot
+  const miniRobot = document.getElementById('miniRobot');
+  const miniCaption = document.getElementById('miniCaption');
+  let asleep = true, startleTimer = null;
+
+  // a) wake up + curious once the footer scrolls into view
+  const ioWake = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if(entry.isIntersecting && asleep){
+        asleep = false;
+        miniRobot.classList.remove('sleeping');
+        miniRobot.classList.add('curious');
+        miniCaption.textContent = "oh, hi — click me.";
+      }
+    });
+  }, {threshold:0.4});
+  ioWake.observe(document.querySelector('footer'));
+
+  // b) startled if the cursor gets close while still asleep
+  window.addEventListener('mousemove', (e) => {
+    if(!asleep) return;
+    const r = miniRobot.getBoundingClientRect();
+    const cx = r.left + r.width/2, cy = r.top + r.height/2;
+    const dist = Math.hypot(e.clientX-cx, e.clientY-cy);
+    if(dist < 130){
+      asleep = false;
+      miniRobot.classList.remove('sleeping');
+      miniRobot.classList.add('startled');
+      miniCaption.textContent = "huh?! oh — hi!";
+      clearTimeout(startleTimer);
+      startleTimer = setTimeout(() => {
+        miniRobot.classList.remove('startled');
+        miniRobot.classList.add('curious');
+        miniCaption.textContent = "click me before you go.";
+      }, 900);
+    }
+  });
+
+  // c) excited when hovering the "Join us" link
+  const joinLink = document.getElementById('joinLink');
+  joinLink.addEventListener('mouseenter', () => { miniRobot.classList.remove('curious'); miniRobot.classList.add('excited'); });
+  joinLink.addEventListener('mouseleave', () => { miniRobot.classList.remove('excited'); if(!asleep) miniRobot.classList.add('curious'); });
+
+  // click mascot for speech bubble fun fact
+  const facts = [
+    "Fun fact: our first hackathon ran on one broken coffee machine.",
+    "Psst — the mascot has no official name yet. Got ideas?",
+    "250+ members and counting. You could be next.",
+    "This footer took more iterations than our last hackathon project."
+  ];
+  let fi = 0;
+  const robotCol = document.getElementById('robotCol');
+  const speech = document.getElementById('speech');
+  document.getElementById('miniRobot').addEventListener('click', () => {
+    speech.textContent = facts[fi % facts.length];
+    fi++;
+    robotCol.classList.add('active');
+    clearTimeout(window._speechTimer);
+    window._speechTimer = setTimeout(() => robotCol.classList.remove('active'), 3200);
+  });
+
+  // magnetic social icons
+  document.querySelectorAll('.f-social span').forEach(icon => {
+    icon.addEventListener('mousemove', (e) => {
+      const r = icon.getBoundingClientRect();
+      const dx = e.clientX - (r.left + r.width/2);
+      const dy = e.clientY - (r.top + r.height/2);
+      icon.style.transform = `translate(${dx*0.25}px, ${dy*0.25 - 3}px)`;
+    });
+    icon.addEventListener('mouseleave', () => { icon.style.transform = ''; });
+  });
+
+  // animated stat counters
+  function animateCount(el, target, suffix) {
+    let start = 0;
+    const dur = 1200, startTime = performance.now();
+    function tick(now){
+      const p = Math.min((now - startTime)/dur, 1);
+      el.textContent = Math.floor(p * target) + suffix;
+      if(p < 1) requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+  }
+  const statEls = [
+    {el: document.getElementById('n1'), target:250, suffix:'+'},
+    {el: document.getElementById('n2'), target:40, suffix:'+'},
+    {el: document.getElementById('n3'), target:8, suffix:''}
+  ];
+  const statsSection = document.querySelector('.stats');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if(entry.isIntersecting){
+        statEls.forEach(s => animateCount(s.el, s.target, s.suffix));
+        io.disconnect();
+      }
+    });
+  }, {threshold:0.3});
+  io.observe(statsSection);
+  // fallback: trigger immediately since footer is near top of this demo page
+  statEls.forEach(s => animateCount(s.el, s.target, s.suffix));
+</script>
+</body>
+</html>
